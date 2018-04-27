@@ -1,7 +1,10 @@
 .PHONY:	rpm clean source
 
-KAFKA_VERSION ?= 0.11.0.1
+## kafka_2.12-1.1.0.tgz
+## KAFKA_VERSION ?= 0.11.0.1
+KAFKA_VERSION ?= 1.1.0
 SCALA_VERSION ?= 2.12
+########    SCALA_VERSION ?= 2.12.5
 VERSION = $(shell echo $(KAFKA_VERSION) | sed "s/-/_/")
 BUILD_NUMBER ?= 2
 BUILD_METRICS ?= 1
@@ -14,7 +17,7 @@ METRICS_GRAPHITE = metrics-graphite-2.2.0.jar
 METRICS_GRAPHITE_URL = http://search.maven.org/remotecontent?filepath=com/yammer/metrics/metrics-graphite/2.2.0/$(METRICS_GRAPHITE)
 
 rpm: source
-	@rpmbuild -v -bb \
+	@rpmbuild -v -ba \
 			--define "version $(VERSION)" \
 			--define "build_number $(BUILD_NUMBER)" \
 			--define "source $(SOURCE)" \
